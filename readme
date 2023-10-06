@@ -1,0 +1,42 @@
+# This guide will walk you through the process of setting up and running our Express.js application. Please follow these steps carefully.
+
+# Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+Node.js: Download and Install Node.js
+Docker: Download and Install Docker
+
+# Create a .env file in the root directory of the project to store environment variables. You can use the following as a template:
+
+dotenv
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/cat-images
+NODE_ENV=development
+
+Make sure to replace MONGODB_URI with your MongoDB connection string and adjust other variables as needed.
+
+# Install project dependencies by running the following command:
+
+npm install
+
+# Start the Express.js server locally:
+
+npm start
+
+This will start the server in development mode, and it will listen on port 3000 by default.
+
+### Running with Docker Compose
+
+Build the Docker containers:
+
+docker-compose build
+
+Start the application using Docker Compose:
+
+docker-compose up
+
+
+## Accessing the Application
+
+Once the server is running, open your web browser and navigate to http://localhost:3000 to access the application.

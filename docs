@@ -1,0 +1,160 @@
+### API Documentation
+
+# POST /register
+
+Register a new user.
+Body:
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+Response
+Status Code: 201 Created
+{
+  "message": "User registered successfully"
+}
+
+Errors
+Status Code: 400 Bad Request -- Invalid email format or missing email/password.
+Status Code: 409 Conflict -- Email address is already registered.
+Status Code: 500 Internal Server Error -- Registration failed due to server error.
+
+
+
+# POST /login
+
+Log in and obtain an access token.
+Body:
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+Response
+Status Code: 200 OK
+{
+  "token": "your-access-token"
+}
+
+Errors
+Status Code: 401 Unauthorized -- Invalid email or password.
+Status Code: 500 Internal Server Error -- Authentication failed due to a server error.
+
+
+# POST /images
+
+Upload an image file
+
+Body:
+{
+image: The image file to be uploaded.
+metadata: Additional metadata related to the image (optional).
+}
+
+Response
+Code Status: 201 Created
+{
+  "message": "Image uploaded successfully",
+  "image": {
+    "_id": "5f887f857875327368f71133",
+    "fileName": "example.jpg",
+    "imageUrl": "/uploads/example.jpg",
+    "metadata": {
+      "description": "Example image"
+    }
+  }
+}
+
+Errors
+Status Code: 400 Bad Request -- Image must be in JPEG or PNG format
+Status Code: 409 Conflict -- Image Already Exists
+Status Code 500 Internal Server Error -- Failed to upload image
+
+
+# GET /images
+
+Retrieve a list of images.
+
+Response
+Status Code: 200 OK
+[
+  {
+    "_id": "5f887f857875327368f71133",
+    "fileName": "example.jpg",
+    "imageUrl": "/uploads/example.jpg",
+    "metadata": {
+      "description": "Example image"
+    }
+  },
+  // Additional images...
+]
+
+Errors
+Status Code: 500 Internal Server Error -- Failed to retrieve image list
+
+
+# GET /images/:id
+
+Retrieve an image by its ID.
+
+Parameters
+id (URL parameter): The unique identifier of the image to retrieve
+
+Response
+Status Code: 200 OK
+The image file data.
+
+Status Code: 404 Not Found -- Image not found
+
+
+# PUT /images/:id
+
+Update an existing image and its metadata by ID.
+
+Parameters
+id (URL parameter): The unique identifier of the image to update.
+
+Request
+{
+image (optional): The updated image file.
+metadata (optional): Updated metadata related to the image.
+}
+
+Response
+Status Code: 200 OK 
+{
+  "message": "Image and metadata updated successfully",
+  "image": {
+    "_id": "5f887f857875327368f71133",
+    "fileName": "updated_image.jpg",
+    "imageUrl": "/uploads/updated_image.jpg",
+    "metadata": {
+      "description": "Updated image description",
+      // Updated metadata fields...
+    }
+  }
+}
+
+Errors
+Status Code: 404 Not Found -- Image not found
+Status Code: 500 Internal Server Error -- Failed to update image and metadata
+
+
+# DELETE /images/:id
+
+Delete an image by its ID.
+
+Parameters
+id (URL parameter): The unique identifier of the image to delete.
+
+Response
+Status Code: 200 OK
+{
+  "message": "Image deleted successfully"
+}
+
+Errors
+Status Code: 404 Not Found -- Image not found
+Status Code: 500 Internal Server Error -- Failed to delete image
+
